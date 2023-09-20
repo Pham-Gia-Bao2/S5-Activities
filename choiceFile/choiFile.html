@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>choifile</title>
+    <!DOCTYPE html>
+
+        <style>
+            /* CSS styles for the elements */
+            body {
+                font-family: Arial, sans-serif;
+                background-color: #f0f0f0;
+                margin: 0;
+                padding: 20px;
+            }
+    
+            .container {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                margin-bottom: 20px;
+            }
+            .input{
+                height: 100px;
+            }
+    
+            .item {
+                margin: 10px;
+            }
+    
+            label {
+                display: block;
+                margin-bottom: 5px;
+            }
+    
+            input[type="text"],
+            input[type="number"] {
+                width: 200px;
+                padding: 5px;
+                border: 1px solid #ccc;
+                border-radius: 4px;
+            }
+    
+            .show {
+                display: flex;
+                flex-wrap: wrap;
+            }
+    
+            .carBody {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                width: 200px;
+                margin: 10px;
+                padding: 10px;
+                background-color: #fff;
+                border: 1px solid #ccc;
+                border-radius: 4px;
+            }
+    
+            .nameProduct {
+                margin: 0;
+            }
+    
+            .priceProduct {
+                margin: 5px 0;
+               
+            }
+    
+            .buy {
+                padding: 10px 20px;
+
+                background-color: #4caf50;
+                color: #fff;
+                border: none;
+                border-radius: 4px;
+                cursor: pointer;
+            }
+    
+            /* Additional CSS styles */
+            h1 {
+                font-size: 18px;
+                margin: 5px 0;
+                text-align: center;
+            }
+    
+            img {
+                max-width: 100%;
+                height: auto;
+                margin-bottom: 10px;
+            }
+           
+            #addItem{
+                width: 50%;
+                display: block;
+                height: 60px;
+                background-color: green;
+                color: white;
+                cursor: pointer;
+            }
+        </style>
+   
+</head>
+
+<body>
+    <div class="container input">
+        <div class="item item1">
+            <label for="input1">Product name</label>
+            <input type="text" id="input1">
+        </div>
+        <div class="item item2">
+            <label for="input2">Product picture</label>
+            <input type="file" name="img" id="input2">
+        </div>
+        <div class="item item1">
+            <label for="input3">Product price</label>
+            <input type="number" min="0" id="input3">
+        </div>
+    </div>
+    <div class="container btn">
+        <button id="addItem" onclick="add()">Add</button>
+    </div>
+    <div class="show">
+     
+    </div>
+    <script>
+        var items = []; // Khởi tạo một mảng rỗng
+
+function add() {
+    var name = document.querySelector('#input1').value;
+    var fileInput = document.querySelector('#input2');
+    var price = document.querySelector('#input3').value;
+
+    if (fileInput.files.length > 0) {
+        var file = fileInput.files[0];
+        var picture = URL.createObjectURL(file);
+
+        var newItem = {
+            name: name,
+            picture: picture,
+            price: price
+        };
+
+        items.push(newItem); // Thêm newItem vào cuối mảng items
+
+        // Hiển thị danh sách các phần tử đã thêm vào
+        displayItems();
+    }
+   
+}
+
+function displayItems() {
+    var cart = document.querySelector('.show');
+    cart.innerHTML = ''; // Xóa nội dung hiện tại của cart
+
+    items.forEach(function(item) {
+        var car = `
+            <div class="carBody">
+                <h1>this is the most popular product</h1>
+                <img src="${item.picture}" alt="anh">
+                <div class="carBody">
+                    <h3 class="nameProduct">${item.name}</h3>
+                    <p class="priceProduct">${item.price}</p>
+                    <button class="buy">Buy</button>
+                </div>
+            </div>`;
+
+        cart.innerHTML += car;
+    });
+}
+    </script>
+</body>
+
+</html>

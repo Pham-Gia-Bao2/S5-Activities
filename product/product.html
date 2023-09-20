@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        /* CSS styles */
+        .container {
+            max-width: 600px;
+            margin: 0 auto;
+            padding: 20px;
+            font-family: Arial, sans-serif;
+        }
+
+        .item {
+            margin-bottom: 10px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+
+        input[type="text"],
+        input[type="number"] {
+            width: 100%;
+            padding: 5px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+        }
+
+        button {
+            padding: 8px 16px;
+            background-color: #4CAF50;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th,
+        td {
+            padding: 8px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        #thead_row {
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <div class="item proName">
+            <label for="input1">Product name</label>
+            <input type="text" id="input1">
+        </div>
+        <div class="item quantyti">
+            <label for="input2">Quantity</label>
+            <input id="input2" value="0" type="number" min="0">
+        </div>
+        <div class="item price">
+            <label for="input3">Unit price</label>
+            <input type="number" value="0" id="input3" min="0">
+        </div>
+        <div class="item discount">
+            <label for="input4">Discount</label>
+            <input type="number" value="0" min="0" id="input4">
+        </div>
+        <div class="item">
+            <button onclick="sell()">Sell</button>
+            <button onclick="Cancle()">Cancel</button>
+        </div>
+        <table id="table">
+            <tr id="thead_row">
+                <th>ID</th>
+                <th>Product name</th>
+                <th>Quantity</th>
+                <th>Unit price</th>
+                <th>Discount</th>
+                <th>Subtotal</th>
+            </tr>
+        </table>
+    </div>
+    <script>
+        var id = 0;
+
+        function sell() {
+            id++;
+            var name = document.getElementById('input1').value;
+            var quantity = document.getElementById('input2').value;
+            var price = document.getElementById('input3').value;
+            var discount = document.getElementById('input4').value;
+            var subTotal = quantity * price * (1 - discount / 100);
+
+            var row = '<tr>';
+            row += '<td>' + id + '</td>';
+            row += '<td>' + name + '</td>';
+            row += '<td>' + quantity + '</td>';
+            row += '<td>' + price + '</td>';
+            row += '<td>' + discount + '</td>';
+            row += '<td>' + subTotal + '</td>';
+            row += '</tr>';
+
+            document.getElementById('table').innerHTML += row;
+        }
+
+        function Cancle() {
+            id++;
+            var name = document.getElementById('input1').value = null;
+            var quantity = document.getElementById('input2').value = 0;
+            var price = document.getElementById('input3').value = 0;
+            var discount = document.getElementById('input4').value = 0;
+            var subTotal = 0;
+        }
+    </script>
+</body>
+
+</html>

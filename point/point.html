@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Point</title>
+    <style>
+        .container {
+            margin: 0 auto;
+            width: 50vw;
+            height: 70vh;
+            background-color: rgb(3, 59, 59);
+            color: white;
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+            border-radius: 20px;
+            align-items: center;
+            margin-top: 60px;
+        }
+
+        .item {
+            width: 70%;
+            height: 40px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .item label {
+            width: 20%;
+
+        }
+
+        .item input,
+        #year {
+            width: 70%;
+            height: 100%;
+        }
+
+        .show_result {
+            height: 150px;
+            background-color: white;
+            color: black;
+            border-radius: 10px;
+            font-size: 30px;
+        }
+        .btn{
+            background-color: red;
+            width: 50%;
+            margin-left: 130px;
+
+        }
+        .btn button{
+            width: 50%;
+            height: 100%;
+            cursor: pointer;
+        }
+        .btn button:active{
+            background-color: orangered;
+            border: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1> Bảng điểm của em</h1>
+        <div class="item item_input1">
+            <label for="input1">Semestter1</label>
+            <input type="number" id="input1" class="input1" min="0" max="10">
+        </div>
+        <div class="item item_input2">
+            <label for="input2">Semestter1</label>
+            <input type="number" id="input2" class="input2" min="0" max="10">
+        </div>
+        <div class="item item3">
+            <label for="year">
+                Year
+            </label>
+            <select name="year" id="year">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+            </select>
+        </div>
+        <div class="item total">
+            <label for="input_total">summarise</label>
+            <input type="text" id="sum" readonly>
+        </div>
+        <div class="item btn">
+            <button id="btn_ok" onclick="caculator()">Ok</button>
+            <button id="btn_cancel" onclick="cancel()">Cancel</button>
+        </div>
+        <div id="result" class="item show_result">
+            result
+        </div>
+
+    </div>
+    <script>
+        function cancel() {
+            // reset value = 0 
+            var a = parseInt(document.getElementById('input1').value = 0);
+            var b = parseInt(document.getElementById('input2').value = 0);
+            var selectElement = document.getElementById("year");
+            selectElement.value = 1;
+            document.getElementById('sum').value = 0;
+        }
+        function caculator() {
+            // lấy giá trị từ input 1
+            var a = parseInt(document.getElementById('input1').value);
+            // lấy giá trị từ input 2
+            var b = parseInt(document.getElementById('input2').value);
+            // lấy giá trị từ ô select
+            var selectElement = document.getElementById("year");
+            // Lấy giá trị đã chọn
+            var year = parseInt(selectElement.value);
+            var total; // tạo biến tính điểm
+            var rank; 
+            var color;
+            switch (year) {
+                // nếu là sinh viên năm 1
+                case 1: total = parseFloat((a+(b*2))/3);
+                    break;
+                // nếu là sinh viên năm 2
+                case 2: total = parseFloat((a*2)+(b*4)/5);
+                    break;
+                // nếu là sinh viên năm 3
+                case 3: total = parseFloat((a*3)+(b*4)/7);
+                    break;
+            }
+            document.getElementById('sum').value = total;// hiển thị kết quả tính điểm
+            if (total >= 9) {
+                rank = "Gioi";
+                color = "red";
+            }
+            else if (total >= 6.5 && total < 9) {
+                rank = "Kha";
+                color = "green";
+            }
+            else {
+                rank = "Yeu";
+                color = "blue";
+            }
+            document.getElementById('result').innerHTML = "Hoc Sinh " + rank;// hiển thị xếp hạng
+            document.getElementById('result').style.color = color;
+
+        }
+        
+    </script>
+
+</body>
+
+</html>
